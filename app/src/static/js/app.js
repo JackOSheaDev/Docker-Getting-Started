@@ -1,3 +1,4 @@
+
 function App() {
     const { Container, Row, Col } = ReactBootstrap;
     return (
@@ -9,6 +10,16 @@ function App() {
             </Row>
         </Container>
     );
+}
+//This is a new counter I added which records how many items you have at a glance.
+function Counter(props){
+    return (
+        <div>
+            <h1>You have {props.value} items to complete !</h1>
+            
+        </div>
+        
+    )
 }
 
 function TodoListCard() {
@@ -49,8 +60,12 @@ function TodoListCard() {
 
     if (items === null) return 'Loading...';
 
+    
+
     return (
         <React.Fragment>
+            <Counter value={items.length}/>
+            
             <AddItemForm onNewItem={onNewItem} />
             {items.length === 0 && (
                 //Modified Code with correct line.
@@ -64,7 +79,10 @@ function TodoListCard() {
                     onItemRemoval={onItemRemoval}
                 />
             ))}
+
+        
         </React.Fragment>
+        
     );
 }
 
@@ -103,7 +121,7 @@ function AddItemForm({ onNewItem }) {
                 <InputGroup.Append>
                     <Button
                         type="submit"
-                        variant="success"
+                        variant="info"
                         disabled={!newItem.length}
                         className={submitting ? 'disabled' : ''}
                     >
